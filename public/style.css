@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-style: italic;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  max-width: 768px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.nav {
+  padding: 0.25rem 0 0.5rem;
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main {
+  padding: 1.5rem 0;
+}
+
+.page_head {
+  border-bottom: 2px dashed;
+}
+
+#image_form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#image_form input {
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+#image_form input[type="submit"] {
+  width: fit-content;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+
+#preview_text {
+  padding-top: 1.5rem;
+}
+
+.preview {
+  overflow: scroll;
+  max-height: 512px;
+}
+
+#preview_img {
+  padding-top: 1rem;
+}
+
+.how-to dt {
+  font-weight: bold;
+}

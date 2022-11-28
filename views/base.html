@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, max-scale=1.0"
+    />
+    <meta name="description" content="Cataract Prediction project" />
+    <title>Home | Cataract Prediction</title>
+    <link rel="stylesheet" href="/public/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <h1>Cataract Prediction</h1>
+        <a
+          href="https://github.com/niitish/cataract-prediction"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="/public/images/github.png" alt="go to source" />
+        </a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/how-to">How to use</a></li>
+        </ul>
+      </nav>
+      <p>
+        This project aims to predict the presence of cataract in eyes using deep
+        learning techniques.
+      </p>
+    </header>
+    <main class="main">{% block content %} {% endblock %}</main>
+  </body>
+</html>
