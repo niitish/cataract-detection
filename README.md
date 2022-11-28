@@ -1,1 +1,1 @@
-# cataract-prediction
+# cataract-detection

@@ -1,6 +1,7 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% block title %}How to use{% endblock %}
+{% block content %}
 <h2 class="page_head">How to use</h2>
-
 <dl class="how-to">
   <dt>Step 1</dt>
   <dd>Visit <a href="/">Home</a>.</dd>
@@ -9,12 +10,11 @@
   <dd>
     <i>
       If possible, please resize the image to 192x256 resoltuion, ensuring that
-      eyeball covers most of the space, it will result in much faster prediction
-      as server won't have to resize the image.
+      eyeball covers most of the space, it will help reduce server load thus resulting in much faster results.
     </i>
   </dd>
   <dt>Step 3</dt>
-  <dd>Click on "Get Prediction" button.</dd>
+  <dd>Click on "Get Result" button.</dd>
   <dt>Step 4</dt>
   <dd>After submission, you will be redirected to the results page.</dd>
 </dl>
