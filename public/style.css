@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  background: url("/public/images/bg.webp") center no-repeat fixed;
+  background-size: cover;
+}
+
 body,
 h1,
 h2,
@@ -16,6 +21,14 @@ ul,
 li {
   margin: 0;
   padding: 0;
+}
+
+p,
+label,
+button,
+input,
+li {
+  font-size: 1.15rem;
 }
 
 ul,
@@ -34,6 +47,15 @@ body {
   max-width: 768px;
   margin: auto;
   padding: 2rem 1rem;
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.7) 30%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.7) 70%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
 }
 
 .title {
@@ -58,6 +80,12 @@ body {
   gap: 0.5rem;
 }
 
+.nav ul li {
+  padding: 0rem 0.25rem;
+  background-color: white;
+  border-radius: 6px;
+}
+
 .main {
   padding: 1.5rem 0;
 }
@@ -74,7 +102,7 @@ body {
 
 #image_form input {
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 #image_form input[type="submit"] {
@@ -87,16 +115,12 @@ body {
 }
 
 #preview_text {
-  padding-top: 1.5rem;
+  padding: 1.5rem 0 1rem;
 }
 
 .preview {
   overflow: scroll;
   max-height: 512px;
-}
-
-#preview_img {
-  padding-top: 1rem;
 }
 
 .how-to dt {
