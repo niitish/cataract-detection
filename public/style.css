@@ -5,7 +5,15 @@
 }
 
 html {
-  background: url("/public/images/bg.webp") center no-repeat fixed;
+  background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.7) 30%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.7) 70%,
+      rgba(255, 255, 255, 0.8) 100%
+    ),
+    url("/public/images/bg.webp") center no-repeat fixed;
   background-size: cover;
 }
 
@@ -48,14 +56,6 @@ body {
   margin: auto;
   padding: 2rem 1rem;
   height: 100vh;
-  background-image: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0.8) 0%,
-    rgba(255, 255, 255, 0.7) 30%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.7) 70%,
-    rgba(255, 255, 255, 0.8) 100%
-  );
 }
 
 .title {
