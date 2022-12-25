@@ -49,6 +49,8 @@ def get_pred():
         ph = PredictionHelper(filePath)
         res = ph.run()
 
+        os.remove(filePath)
+
         return render_template('pred.html', result=res)
 
 
