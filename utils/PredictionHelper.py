@@ -1,9 +1,7 @@
-
 import skimage.feature as skf
 import pandas as pd
 import numpy as np
 import cv2 as cv
-import sklearn  # not required, just to repress the import error
 import joblib
 HEIGHT = 392
 WIDTH = 392
