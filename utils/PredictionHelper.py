@@ -23,7 +23,8 @@ class PredictionHelper:
 
     def preprocess(self):
         img = cv.imread(self.path_to_image)
-        gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        test_img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+        gray_img = cv.cvtColor(test_img, cv.COLOR_RGB2GRAY)
         thresh_img = cv.adaptiveThreshold(
             gray_img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 11, 3)
 
@@ -33,10 +34,11 @@ class PredictionHelper:
         cnts = sorted(cnts, key=cv.contourArea, reverse=True)
         for c in cnts:
             x, y, w, h = cv.boundingRect(c)
-            thresh_img = thresh_img[y:y+h, x:x+w]
+            thresh_img = img[y:y+h, x:x+w]
             break
 
         img = cv.resize(thresh_img, (WIDTH, HEIGHT))
+        img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
         self.coocurrence_matrix = skf.graycomatrix(img, [DISTANCE], [THETA], 256,
                                                    symmetric=True, normed=True)
@@ -47,13 +49,13 @@ class PredictionHelper:
         self.features[4] = self.glcm_feature('dissimilarity')
 
     def scale_data(self):
-        scaler = joblib.load('scaler.joblib')
+        scaler = joblib.load('scaler1.joblib')
         data = pd.DataFrame([self.features], columns=[
                             'contrast', 'homogeneity', 'energy', 'correlation', 'dissimilarity'])
         self.scaled_features = scaler.transform(data)
 
     def predict(self):
-        model = joblib.load('model.joblib')
+        model = joblib.load('model1.joblib')
         result = model.predict_proba(self.scaled_features)
         return result
 
@@ -61,4 +63,4 @@ class PredictionHelper:
         self.preprocess()
         self.scale_data()
         result = self.predict()
-        return round(result[0][1]*100, 3)
+        return round(result[0][1]*100, 4)
