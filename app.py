@@ -18,24 +18,24 @@ if not os.path.exists(app.config["UPLOAD_FOLDER"]):
     os.makedirs(app.config["UPLOAD_FOLDER"])
 
 
-@app.get('/')
+@app.get("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @app.get("/about")
 def about():
-    return render_template('about.html')
+    return render_template("about.html")
 
 
 @app.get("/how-to")
 def howto():
-    return render_template('how-to.html')
+    return render_template("how-to.html")
 
 
 @app.post("/get-pred")
 def get_pred():
-    f = request.files['image']
+    f = request.files["image"]
     if not f:
         return "No file selected."
     elif f.mimetype not in ALLOWED_EXTENSIONS:
@@ -43,7 +43,7 @@ def get_pred():
     else:
         fileExtension = f.mimetype.split("/")[1]
         fileName = secure_filename(uuid4().hex+"."+fileExtension)
-        filePath = os.path.join(app.config['UPLOAD_FOLDER'], fileName)
+        filePath = os.path.join(app.config["UPLOAD_FOLDER"], fileName)
         f.save(filePath)
 
         ph = PredictionHelper(filePath)
@@ -51,7 +51,7 @@ def get_pred():
 
         os.remove(filePath)
 
-        return render_template('pred.html', result=res)
+        return render_template("pred.html", result=res)
 
 
 if __name__ == "__main__":
