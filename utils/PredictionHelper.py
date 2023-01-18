@@ -10,11 +10,16 @@ THETA = 90
 
 
 class PredictionHelper:
-    def __init__(self, path):
-        self.path_to_image = path
+    def __init__(self):
+        self.path_to_image = None
         self.coocurrence_matrix = None
         self.features = np.zeros(5)
         self.scaled_features = None
+        self.scaler = joblib.load('artifacts/scaler1.joblib')
+        self.model = joblib.load('artifacts/model1.joblib')
+
+    def set_image_path(self, path):
+        self.path_to_image = path
 
     def glcm_feature(self, feature_name):
         feature = skf.graycoprops(self.coocurrence_matrix, feature_name)
@@ -49,14 +54,12 @@ class PredictionHelper:
         self.features[4] = self.glcm_feature('dissimilarity')
 
     def scale_data(self):
-        scaler = joblib.load('scaler1.joblib')
         data = pd.DataFrame([self.features], columns=[
                             'contrast', 'homogeneity', 'energy', 'correlation', 'dissimilarity'])
-        self.scaled_features = scaler.transform(data)
+        self.scaled_features = self.scaler.transform(data)
 
     def predict(self):
-        model = joblib.load('model1.joblib')
-        result = model.predict_proba(self.scaled_features)
+        result = self.model.predict_proba(self.scaled_features)
         return result
 
     def run(self):

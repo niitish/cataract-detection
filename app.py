@@ -17,6 +17,8 @@ ALLOWED_EXTENSIONS = ["image/png", "image/jpg", "image/jpeg"]
 if not os.path.exists(app.config["UPLOAD_FOLDER"]):
     os.makedirs(app.config["UPLOAD_FOLDER"])
 
+ph = PredictionHelper()
+
 
 @app.get("/")
 def index():
@@ -46,7 +48,7 @@ def get_pred():
         filePath = os.path.join(app.config["UPLOAD_FOLDER"], fileName)
         f.save(filePath)
 
-        ph = PredictionHelper(filePath)
+        ph.set_image_path(filePath)
         res = ph.run()
 
         os.remove(filePath)
