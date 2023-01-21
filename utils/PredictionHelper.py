@@ -15,8 +15,8 @@ class PredictionHelper:
         self.coocurrence_matrix = None
         self.features = np.zeros(5)
         self.scaled_features = None
-        self.scaler = joblib.load('artifacts/scaler1.joblib')
-        self.model = joblib.load('artifacts/model1.joblib')
+        self.scaler = joblib.load('artifacts/scaler2.joblib')
+        self.model = joblib.load('artifacts/model2.joblib')
 
     def set_image_path(self, path):
         self.path_to_image = path
