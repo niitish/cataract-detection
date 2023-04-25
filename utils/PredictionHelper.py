@@ -18,7 +18,7 @@ class PredictionHelper:
         self.scaled_features = None
         self.cnn_img = []
         self.scaler = joblib.load('artifacts/scaler2.joblib')
-        self.svm_model = joblib.load('artifacts/model2.joblib')
+        self.svm_model = joblib.load('artifacts/svm2.joblib')
         self.cnn_model = joblib.load('artifacts/cnn1.joblib')
 
     def set_image_path(self, path):
