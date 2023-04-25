@@ -53,7 +53,7 @@ def get_pred():
 
         os.remove(filePath)
 
-        return render_template("pred.html", result=res)
+        return render_template("pred.html", svm=res[0], cnn=res[1])
 
 
 if __name__ == "__main__":

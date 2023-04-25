@@ -1,7 +1,12 @@
-{% extends "base.html" %} {% block title %}Prediction Result{% endblock %} {% block
-content %}
+{% extends "base.html" %} {% block title %}Prediction Result{% endblock %} {%
+block content %}
 <h2 class="page_head">Cataract Result</h2>
 <p class="pred-result">
-  You have a <span class="pred-result__value">{{ result }}</span>% chances of having cataract.
+	CNN <span class="pred-result__value">{{ cnn }}</span>% chances of having
+	cataract.
+</p>
+<p class="pred-result">
+	SVM <span class="pred-result__value">{{ svm }}</span>% chances of having
+	cataract.
 </p>
 {% endblock %}
