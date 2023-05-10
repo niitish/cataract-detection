@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap");
 
 * {
 	box-sizing: border-box;
@@ -17,6 +17,7 @@ li,
 dl {
 	margin: 0;
 	padding: 0;
+	color: #454545;
 }
 
 p,
@@ -45,7 +46,8 @@ button {
 }
 
 body {
-	font-family: "Open Sans", sans-serif;
+	font-family: "Source Sans Pro", sans-serif;
+	user-select: none;
 }
 
 main {
@@ -67,6 +69,13 @@ header {
 	margin: auto;
 	padding: 0 1rem;
 	border-bottom: 1px solid #45454520;
+}
+
+header h1 a {
+	font-size: 1.75rem;
+	color: #454545 !important;
+	font-weight: 600;
+	font-style: normal;
 }
 
 header img {

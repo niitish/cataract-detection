@@ -1,8 +1,6 @@
 const formImageElement = document.getElementById("image");
 const previewTextElement = document.getElementById("preview_text");
 const image = document.getElementById("preview_img");
-const ham = document.getElementById("ham");
-const closeHam = document.getElementById("close-btn");
 
 const clearThings = () => {
 	formImageElement.value = "";
@@ -28,11 +26,3 @@ formImageElement.onchange = () => {
 	};
 	reader.readAsDataURL(file);
 };
-
-ham.addEventListener("click", () => {
-	ham.nextElementSibling.classList.add("active");
-});
-
-closeHam.addEventListener("click", () => {
-	ham.nextElementSibling.classList.remove("active");
-});
