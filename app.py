@@ -30,9 +30,9 @@ def about():
     return render_template("about.html")
 
 
-@app.get("/how-to")
+@app.get("/usage")
 def howto():
-    return render_template("how-to.html")
+    return render_template("usage.html")
 
 
 @app.post("/get-pred")

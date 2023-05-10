@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, max-scale=1.0"
-    />
-    <meta
-      name="description"
-      content="A project to detect cataract using deep learning techniques."
-    />
-    <title>{% block title %} {% endblock %} | Cataract Detection</title>
-    <link rel="stylesheet" href="/public/style.css" />
-  </head>
-  <body>
-    <header>
-      <div class="title">
-        <h1>Cataract Detection</h1>
-        <a
-          href="https://github.com/niitish/cataract-detection"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="/public/images/github.png" alt="go to source" />
-        </a>
-      </div>
-      <nav class="nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/how-to">Usage</a></li>
-          <li><a href="/samples">Samples</a></li>
-        </ul>
-      </nav>
-      <p>
-        This project aims to detect the presence of cataract using machine
-        learning techniques.
-      </p>
-    </header>
-    <main class="main">{% block content %} {% endblock %}</main>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="A project to detect cataract using deep learning techniques."
+		/>
+		<title>{% block title %} {% endblock %} | Cataract Detection</title>
+		<link rel="stylesheet" href="/public/style.css" />
+	</head>
+	<body>
+		<header>
+			<h1>CatDet</h1>
+			<button id="ham">&#9776;</button>
+			<nav class="overlay">
+				<button id="close-btn">&times;</button>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/usage">Usage</a></li>
+					<li><a href="/samples">Samples</a></li>
+					<li>
+						<a
+							href="https://github.com/niitish/cataract-detection"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img
+								class="github"
+								src="/public/images/github.png"
+								alt="go to source"
+							/>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>{% block content %} {% endblock %}</main>
+	</body>
 </html>
