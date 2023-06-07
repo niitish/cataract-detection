@@ -6,6 +6,7 @@ import joblib
 import tensorflow as tf
 from tensorflow import keras
 from keras import backend as K
+from skimage.filters import sobel
 from keras.utils import get_custom_objects
 SVM_DIM = 392
 CNN_DIM = 216
@@ -29,6 +30,7 @@ class PredictionHelper:
         self.scaler = joblib.load('artifacts/scaler2.joblib')
         self.svm_model = joblib.load('artifacts/svm2.joblib')
         self.cnn_model = keras.models.load_model('artifacts/cnn1.h5')
+        self.rf_model = joblib.load('artifacts/ene.joblib')
 
     def set_image_path(self, path):
         self.path_to_image = path
@@ -38,8 +40,46 @@ class PredictionHelper:
         result = np.average(feature)
         return result
 
+    def rf_feature_extractor(self, input_image):
+        df = pd.DataFrame()
+
+        img = input_image.copy()
+
+        num = 1
+        kernels = []
+        for theta in range(2):
+            theta = theta / 4. * np.pi
+            for sigma in (1, 3):
+                lamda = np.pi / 4
+                gamma = 0.5
+                gabor_label = 'Gabor' + str(num)
+                kernel = cv.getGaborKernel(
+                    (9, 9), sigma, theta, lamda, gamma, 0, ktype=cv.CV_32F)
+                kernels.append(kernel)
+                fimg = cv.filter2D(img, cv.CV_8UC3, kernel)
+                filtered_img = fimg.reshape(-1)
+                df[gabor_label] = filtered_img
+                num += 1
+
+        edge_sobel = sobel(img)
+        edge_sobel1 = edge_sobel.reshape(-1)
+        df['Sobel'] = edge_sobel1
+
+        return df
+
     def preprocess(self):
         img = cv.imread(self.path_to_image)
+        rf_img = cv.resize(img, (RF_DIM, RF_DIM))
+        rf_img = rf_img / 255.0
+
+        rf_features = self.rf_feature_extractor(rf_img)
+        rf_features = np.expand_dims(rf_features, axis=0)
+        rf_features = np.reshape(rf_features, (1, -1))
+        pred_rf = self.rf_model.predict(rf_features)
+
+        if pred_rf[0] == 'non eye':
+            return False
+
         color_img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
         gray_img = cv.cvtColor(color_img, cv.COLOR_RGB2GRAY)
         thresh_img = cv.adaptiveThreshold(
@@ -69,6 +109,8 @@ class PredictionHelper:
         self.features[3] = self.glcm_feature('correlation')
         self.features[4] = self.glcm_feature('dissimilarity')
 
+        return True
+
     def scale_data(self):
         data = pd.DataFrame([self.features], columns=[
                             'contrast', 'homogeneity', 'energy', 'correlation', 'dissimilarity'])
@@ -82,9 +124,13 @@ class PredictionHelper:
         result = self.cnn_model.predict(self.cnn_img)
         return result
 
-    def run(self):
-        self.preprocess()
+    def run(self) -> dict[str, float]:
+        is_eye = self.preprocess()
+
+        if not is_eye:
+            return {"eye": is_eye, "svm": 0, "cnn": 0}
+
         self.scale_data()
         r_svm = self.predict_svm()
         r_cnn = self.predict_cnn()
-        return [round(r_svm[0][1]*100, 4), round(r_cnn[0][1]*100, 4)]
+        return {"eye": is_eye, "svm": round(r_svm[0][1]*100, 4), "cnn": round(r_cnn[0][1]*100, 4)}

@@ -17,8 +17,6 @@ ALLOWED_EXTENSIONS = ["image/png", "image/jpg", "image/jpeg"]
 if not os.path.exists(app.config["UPLOAD_FOLDER"]):
     os.makedirs(app.config["UPLOAD_FOLDER"])
 
-ph = PredictionHelper()
-
 
 @app.get("/")
 def index():
@@ -37,6 +35,8 @@ def howto():
 
 @app.post("/get-pred")
 def get_pred():
+    ph = PredictionHelper()
+
     f = request.files["image"]
     if not f:
         return "No file selected."
@@ -51,10 +51,14 @@ def get_pred():
         ph.set_image_path(filePath)
         res = ph.run()
 
+        if not res["eye"]:
+            os.remove(filePath)
+            return "No eye detected."
+
         os.remove(filePath)
 
-        return render_template("pred.html", svm=res[0], cnn=res[1])
+        return render_template("pred.html", svm=res["svm"], cnn=res["cnn"])
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
