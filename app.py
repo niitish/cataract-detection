@@ -53,7 +53,7 @@ def get_pred():
 
         if not res["eye"]:
             os.remove(filePath)
-            return "No eye detected."
+            return render_template("non-eye.html")
 
         os.remove(filePath)
 

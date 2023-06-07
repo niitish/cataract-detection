@@ -20,7 +20,6 @@ dl {
 	color: #454545;
 }
 
-p,
 label,
 button,
 input,
@@ -135,12 +134,12 @@ nav ul {
 	display: none;
 }
 
-.usage {
-	font-size: 1rem;
-}
-
 .usage dt {
 	font-weight: bold;
+}
+
+.pred-result {
+	font-size: 1.15rem;
 }
 
 .pred-result__value {
